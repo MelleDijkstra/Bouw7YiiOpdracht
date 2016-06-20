@@ -1,10 +1,10 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use yii;
 use common\models\Activity;
-use backend\models\ActivitySearch;
+use frontend\models\ActivitySearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,9 +74,9 @@ class ActivitiesController extends Controller
     public function actionCreate()
     {
         $model = new Activity();
+        $model->owner = Yii::$app->user->id;
 
-        if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

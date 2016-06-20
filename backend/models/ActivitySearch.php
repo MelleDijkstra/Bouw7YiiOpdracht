@@ -1,12 +1,11 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
-use Yii;
+use yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Activity;
-use yii\db\Expression;
 
 /**
  * ActivitySearch represents the model behind the search form about `common\models\Activity`.
@@ -19,7 +18,7 @@ class ActivitySearch extends Activity
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'owner'], 'integer'],
             [['name', 'type', 'description', 'image'], 'safe'],
         ];
     }
@@ -44,8 +43,6 @@ class ActivitySearch extends Activity
     {
         $query = Activity::find();
 
-        $query->where('owner = '.Yii::$app->getUser()->getId());
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -65,6 +62,7 @@ class ActivitySearch extends Activity
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'owner', $this->owner])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'image', $this->image]);
 

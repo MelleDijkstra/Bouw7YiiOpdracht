@@ -1,7 +1,7 @@
 <?php
 namespace common\models;
 
-use Yii;
+use yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -44,20 +44,14 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function attributes() {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
-            'username' => 'Gebruikesnaam',
+            'username' => 'Gebruikersnaam',
             'email' => 'Email',
             'status' => 'Status',
             'created_at' => 'Datum aangemaakt',
             'updated_at' => 'Datum aangepast',
-        ];
-    }
-
-    public function attributeLabels() {
-        return [
-
         ];
     }
 
@@ -67,6 +61,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username','email'], 'required'],
+            [['username','email'], 'unique'],
+            ['email','email'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
@@ -140,13 +137,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatus() {
-        return $this->status;
     }
 
     /**

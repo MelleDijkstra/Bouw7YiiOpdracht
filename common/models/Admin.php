@@ -26,7 +26,6 @@ class Admin extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * @inheritdoc
      */
@@ -42,6 +41,17 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
+        ];
+    }
+
+    public function attributeLabels() {
+        return [
+            'id' => 'ID',
+            'username' => 'Gebruikersnaam',
+            'email' => 'Email',
+            'status' => 'Status',
+            'created_at' => 'Datum aangemaakt',
+            'updated_at' => 'Datum aangepast',
         ];
     }
 

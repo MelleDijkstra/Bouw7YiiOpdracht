@@ -2,7 +2,8 @@
 
 namespace common\models;
 
-use Yii;
+use yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "activities".
@@ -18,8 +19,13 @@ use Yii;
  * @property ActivitiesCategories[] $activitiesCategories
  * @property Category[] $categories
  */
-class Activity extends \yii\db\ActiveRecord
+class Activity extends ActiveRecord
 {
+    /**
+     * @var yii\web\UploadedFile
+     */
+    public $file;
+
     /**
      * @inheritdoc
      */
@@ -39,8 +45,11 @@ class Activity extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['name', 'type', 'image'], 'string', 'max' => 255],
             [['owner'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['owner' => 'id']],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif'],
         ];
     }
+    
+    
 
     /**
      * @inheritdoc
@@ -52,7 +61,7 @@ class Activity extends \yii\db\ActiveRecord
             'name' => 'Naam',
             'type' => 'Type',
             'description' => 'Beschrijving',
-            'categories' => 'Categorien',
+            'categories' => 'Categorieën',
             'image' => 'Plaatje',
         ];
     }

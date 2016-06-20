@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Verwijderen', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Verwijder dit item?',
+                'confirm' => 'Weet je zeker dat je dit item wilt verwijderen?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -32,13 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'type',
             [
-                'attribute'=>'owner',
-                'value'=>$model->getOwner0()->one()->username,
+                'attribute' => 'owner',
+                'value' => $model->getOwner0()->one()->username,
             ],
-            [
-                'attribute'=>'description',
-                'format' => 'raw',
-            ],
+            'description:raw',
             'image:image',
         ],
     ]) ?>

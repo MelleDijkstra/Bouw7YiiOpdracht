@@ -15,48 +15,50 @@ deploying the application in different environments.
 Documentation is at [docs/guide/README.md](docs/guide/README.md).
 
 #### Algemeen
-- [ ] Activiteit kan meerdere categorien bevatten (one to many relation)
-- [ ] Activiteit bevat:
+- [ ] Activiteit kan meerdere categorieën bevatten (many to many relation) - (Alleen nog in database)
+- Activiteit bevat:
 	- [x] Naam
-	- [ ] Type
-	- [ ] Beschrijving
-	- [ ] Image
-	- [ ] Categorie
-- [ ] Categorie bevat alleen een naam
-- [ ] Voor omschrijving wordt een WYSIWYG veld
-- [ ] Afbeelding van een activiteit wordt ook als afbeelding laten zien (niet url)
+	- [x] Type
+	- [x] Beschrijving
+	- [x] Image
+	- [ ] Categorieën
+- [x] Categorie bevat naam
+- [x] Voor omschrijving wordt een WYSIWYG veld gebruikt
+- [x] Afbeelding van een activiteit wordt ook als afbeelding laten zien (niet url)
 - [ ] Bij de CU operaties van een activiteit kan een bestand worden meegestuurd voor de afbeelding
-- [ ] Checkbox list voor het kiezen in welke categorie een activiteit zit
-- [ ] Alle correct verzonden informatie bij CU operaties worden ook goed opegslagen in de database
+- [x] Checkbox list voor het kiezen in welke categorie een activiteit zit
+- [ ] Activiteit gelinked met meerdere categorieën
+- [ ] Alle correct verzonden informatie bij CU operaties worden ook goed opgeslagen in de database
+- [ ] Type kan aangepast worden in de READ view van een activiteit met een dropdown.
 
 #### Yii
-- [ ] Gebruik van migraties
+- [x] Gebruik van migraties
 - [ ] Gebruik RBAC voor rechten
 
 #### Gebruiker
-- [ ] Inloggen
-- [ ] Gebruiker kan alleen zijn eigen activiteiten zien
-- [ ] Eigen activiteiten:
-	- [ ] bekijken
-	- [ ] aanmaken
-	- [ ] aanpassen
-	- [ ] verwijderen
+- [x] Inloggen
+- [x] Gebruiker kan alleen zijn eigen activiteiten zien
+- Eigen activiteiten:
+	- [x] bekijken
+	- [x] aanmaken
+	- [x] aanpassen
+	- [x] verwijderen
 
 #### Admin
-- [ ] Inloggen
-- [ ] Admin kan alle activiteiten zien
-- [ ] Activiteiten:
-	- [ ] bekijken
-	- [ ] aanmaken
-	- [ ] aanpassen
-	- [ ] verwijderen
-- [ ] Categorien:
-	- [ ] bekijken
-	- [ ] aanmaken
-	- [ ] aanpassen
-	- [ ] verwijderen
-- [ ] Gebruikers:
-	- [ ] bekijken
-	- [ ] aanmaken
-	- [ ] aanpassen
-	- [ ] verwijderen
+- [x] Inloggen
+- [x] Admin kan alle activiteiten zien
+- Activiteiten:
+	- [x] bekijken
+	- [x] aanmaken
+	- [x] aanpassen
+	- [x] verwijderen
+- Categorieën:
+	- [x] bekijken
+	- [x] aanmaken
+	- [x] aanpassen
+	- [x] verwijderen
+- Gebruikers:
+	- [x] bekijken
+	- [ ] aanmaken (Validatie is nog niet helemaal compleet)
+	- [ ] aanpassen (Hetzelfde als aanmaken)
+	- [x] verwijderen

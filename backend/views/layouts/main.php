@@ -36,7 +36,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Activiteiten', 'url' => ['/activities']],
-        ['label' => 'Categorien', 'url' => ['/categories']],
+        ['label' => 'Categorieën', 'url' => ['/categories']],
         ['label' => 'Gebruikers', 'url' => ['/users']],
     ];
     if (Yii::$app->user->isGuest) {

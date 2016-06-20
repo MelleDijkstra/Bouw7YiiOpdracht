@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $categories array The categories to choose from see common/models/Category */
 
 $this->title = 'Nieuwe Activiteit';
-$this->params['breadcrumbs'][] = ['label' => 'Activities', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Activiteiten', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activity-create">

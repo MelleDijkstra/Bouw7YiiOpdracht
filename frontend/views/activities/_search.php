@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ActivitySearch */
+/* @var $model frontend\models\ActivitySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'type') ?>
 
+    <?= $form->field($model, 'owner') ?>
+
     <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'image') ?>
+    <?php // echo $form->field($model, 'image') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

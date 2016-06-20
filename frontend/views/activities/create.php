@@ -2,19 +2,19 @@
 
 use yii\helpers\Html;
 
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Activity */
 
-$this->title = 'Update Activity: ' . $model->name;
+$this->title = 'Maak Activiteit';
 $this->params['breadcrumbs'][] = ['label' => 'Activiteiten', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activity-update">
+<div class="activity-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('activity_form', [
+    <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
