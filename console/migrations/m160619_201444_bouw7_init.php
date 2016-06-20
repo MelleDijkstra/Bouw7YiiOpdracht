@@ -9,7 +9,7 @@ class m160619_201444_bouw7_init extends Migration
         $this->createTable('activities', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'type' => $this->string()->notNull(),
+            'type' => $this->integer()->notNull()->defaultValue(0),
             'owner' => $this->integer()->notNull(),
             'description' => $this->text()->notNull(),
             'image' => $this->string()
