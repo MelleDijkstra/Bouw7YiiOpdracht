@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\ActivitiesCategories;
 use yii;
 use common\models\Activity;
 use frontend\models\ActivitySearch;
@@ -76,13 +77,27 @@ class ActivitiesController extends Controller
         $model = new Activity();
         $model->owner = Yii::$app->user->id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if(Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            if($model->save()) {
+                foreach($_POST['Activity']['categories'] as $categoryId) {
+                    $activityCategory = new ActivitiesCategories();
+                    $activityCategory->activity_id = $model->id;
+                    $activityCategory->category_id = $categoryId;
+                    $activityCategory->save();
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                foreach($model->getErrors() as $attribute) {
+                    foreach($attribute as $error) {
+                        Yii::$app->session->addFlash($error);
+                    }
+                }
+            }
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -95,13 +110,30 @@ class ActivitiesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if(Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            if($model->save()) {
+                foreach(ActivitiesCategories::find()->where(['activity_id'=>$model->id])->all() as $activityCategory) {
+                    $activityCategory->delete();
+                }
+                foreach($_POST['Activity']['categories'] as $categoryId) {
+                    $activityCategory = new ActivitiesCategories();
+                    $activityCategory->activity_id = $model->id;
+                    $activityCategory->category_id = $categoryId;
+                    $activityCategory->save();
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                foreach($model->getErrors() as $attribute) {
+                    foreach($attribute as $error) {
+                        Yii::$app->session->addFlash($error);
+                    }
+                }
+            }
         }
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

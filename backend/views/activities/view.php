@@ -30,15 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'value' => $model->getActivityTypes()[$model->type],
+            ],
             [
                 'attribute'=>'owner',
                 'value'=>$model->getOwner0()->one()->username,
             ],
             [
-                'attribute'=>'description',
+                'attribute'=>'categories',
+                'value'=> $model->getCategoryBadges(),
                 'format' => 'raw',
             ],
+            'description:raw',
             'image:image',
         ],
     ]) ?>

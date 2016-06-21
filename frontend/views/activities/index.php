@@ -26,7 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'value' => function($model) {
+                    /**
+                     * @var $model \common\models\Activity
+                     */
+                    return $model->getActivityTypes()[$model->type];
+                },
+            ],
             [
                 'attribute'=>'owner',
                 'value'=> function($model) {
@@ -40,7 +48,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
-            'description:raw',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+            ],
+            [
+                'attribute' => 'categories',
+                'value' => function($model) {
+                    /**
+                     * @var $model \common\models\Activity
+                     */
+                    return $model->getCategoryBadges();
+                },
+                'format' => 'raw',
+            ],
             'image:image',
 
             ['class' => 'yii\grid\ActionColumn'],

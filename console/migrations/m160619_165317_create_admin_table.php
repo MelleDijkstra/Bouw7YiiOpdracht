@@ -35,6 +35,7 @@ class m160619_165317_create_admin_table extends Migration
         $admin = new \common\models\Admin();
         $admin->setAttribute('username','Demo');
         $admin->setAttribute('email', 'demo@example.com');
+        $admin->generateAuthKey();
         $admin->setPassword('123456');
         $admin->save();
     }

@@ -19,14 +19,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList($model->getActivityTypes(),['prompt'=>'Kies activiteits type']) ?>
 
     <?= $form->field($model, 'description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
 
-    <?= $form->field($model, 'owner')->dropDownList(ArrayHelper::map(User::find()->asArray()->all(),'id','username'),['prompt'=>'Choose user']) ?>
+    <?= $form->field($model, 'owner')->dropDownList(ArrayHelper::map(User::find()->asArray()->all(),'id','username'),['prompt'=>'Kies gebruiker']) ?>
 
     <?= $form->field($model, 'categories')->checkboxList(ArrayHelper::map(Category::find()->asArray()->all(),'id','name')) ?>
 

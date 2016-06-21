@@ -1,6 +1,8 @@
 <?php
 
+use common\models\Category;
 use dosamigos\ckeditor\CKEditor;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,12 +17,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList($model->getActivityTypes(),['prompt'=>'Kies activiteits type']) ?>
 
     <?= $form->field($model, 'description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
+
+    <?= $form->field($model, 'categories')->checkboxList(ArrayHelper::map(Category::find()->asArray()->all(),'id','name')) ?>
 
     <?= $form->field($model, 'image')->fileInput(['disabled' => true]) ?>
 

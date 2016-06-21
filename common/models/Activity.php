@@ -26,6 +26,8 @@ class Activity extends ActiveRecord
      */
     public $file;
 
+    public static $activityTypes = ['Actief','Inspannend','Relaxed','Denkvermogen'];
+
     /**
      * @inheritdoc
      */
@@ -48,8 +50,6 @@ class Activity extends ActiveRecord
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, gif'],
         ];
     }
-    
-    
 
     /**
      * @inheritdoc
@@ -64,6 +64,10 @@ class Activity extends ActiveRecord
             'categories' => 'Categorieën',
             'image' => 'Plaatje',
         ];
+    }
+
+    public static function getActivityTypes() {
+        return self::$activityTypes;
     }
 
     /**
@@ -88,5 +92,19 @@ class Activity extends ActiveRecord
     public function getCategories()
     {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])->viaTable('activities_categories', ['activity_id' => 'id']);
+    }
+
+    /**
+     * Shows categories in bootstrap badges
+     */
+    public function getCategoryBadges() {
+        $badges = '';
+        foreach($this->getCategories()->all() as $category) {
+            /**
+             * @var $category Category
+             */
+            $badges .= "<span id=\"category-{$category->id}\" class=\"badge\">{$category->name}</span>";
+        }
+        return $badges;
     }
 }
